@@ -9,6 +9,7 @@ using System.Net;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Globalization;
 
 namespace ExiasE1Service
 {
@@ -328,8 +329,24 @@ namespace ExiasE1Service
                                     Result = ResultMatch.Result("${Result}");
                                     FileResultLog($"PSMV2 код: {PSMTestCode}");
                                     FileResultLog($"{Test} - результат: {Result}");
+
+                                    // нужно округлять значение результата до 2 цифр после запятой
+                                    IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
+                                    double res = double.Parse(Result, formatter);
+                                    //res = Convert.ToDouble(Result);
+                                    res = Math.Round(res, 2);
+                                    FileResultLog($"Результат округлен: {res}");
+                                    Result = res.ToString();
+
+                                    if ((PSMTestCode != "") && (Result != ""))
+                                    {
+                                        // формируем строку с ответом для результирующего файла
+                                        MessageTest = MessageTest + $"R|1|^^^{PSMTestCode}^^^^{AnalyzerCode}|{Result}|||N||F||ExiasE1^||20230101000001|{AnalyzerCode}" + "\r";
+                                        //Console.WriteLine(MessageTest);
+                                    }
                                 }
 
+                                /*
                                 // если код тест был интерпретирован и результат не пустой
                                 //if (PSMTestCode != "")
                                 if ((PSMTestCode != "") && (Result != ""))
@@ -338,6 +355,7 @@ namespace ExiasE1Service
                                     MessageTest = MessageTest + $"R|1|^^^{PSMTestCode}^^^^{AnalyzerCode}|{Result}|||N||F||ExiasE1^||20230101000001|{AnalyzerCode}" + "\r";
                                     //Console.WriteLine(MessageTest);
                                 }
+                                */
                             }
                         }
 
