@@ -294,6 +294,10 @@ namespace ExiasE1Service
                         string RID = "";
                         string Test = "";
 
+                        // обнулим переменные
+                        MessageHead = "";
+                        MessageTest = "";
+
                         // обрезаем только имя текущего файла
                         string FileName = file.Substring(AnalyzerResultPath.Length + 1);
                         // название файла .ок, который должен создаваться вместе с результирующим для обработки службой FileGetterService
@@ -327,8 +331,20 @@ namespace ExiasE1Service
                                 if (ResultMatch.Success)
                                 {
                                     Result = ResultMatch.Result("${Result}");
-                                    FileResultLog($"PSMV2 код: {PSMTestCode}");
-                                    FileResultLog($"{Test} - результат: {Result}");
+
+                                    //FileResultLog($"PSMV2 код: {PSMTestCode}");
+                                    //FileResultLog($"{Test} - результат: {Result}");
+
+                                    if (PSMTestCode == "")
+                                    {
+                                        FileResultLog($"Код анализатора {Test} не интерпретирован в PSMV2 код.");
+                                        FileResultLog($"{Test} - результат: {Result}");
+                                    }
+                                    else
+                                    {
+                                        FileResultLog($"PSMV2 код: {PSMTestCode}");
+                                        FileResultLog($"{Test} - результат: {Result}");
+                                    }
 
                                     // нужно округлять значение результата до 2 цифр после запятой
                                     IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -374,6 +390,8 @@ namespace ExiasE1Service
                                 // собираем полное сообщение с результатом
                                 AllMessage = MessageHead + "\r" + MessageTest;
                                 //Console.WriteLine(AllMessage);
+
+                                FileResultLog(AllMessage);
 
                                 // создаем файл для записи результата в папке для рез-тов
                                 //if (!File.Exists(CGMPath + @"\" + FileName))
@@ -451,6 +469,18 @@ namespace ExiasE1Service
                             }
                         }
                         // или сюда блок else  и помещение файла в ошибки
+                        else
+                        {
+                            // помещение файла в папку с ошибками
+                            if (File.Exists(ErrorPath + @"\" + FileName))
+                            {
+                                File.Delete(ErrorPath + @"\" + FileName);
+                            }
+                            File.Move(file, ErrorPath + @"\" + FileName);
+
+                            FileResultLog("Ошибка обработки файла. Файл перемещен в папку Error");
+                            FileResultLog("");
+                        }
                     }
                 }
                 catch (Exception ex)

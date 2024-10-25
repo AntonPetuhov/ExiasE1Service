@@ -9,8 +9,7 @@ C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\bin\Debug\Syst
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\bin\Debug\System.Security.AccessControl.xml
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\bin\Debug\System.Security.Permissions.xml
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\bin\Debug\System.Security.Principal.Windows.xml
-C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.csproj.AssemblyReference.cache
-C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.csproj.CoreCompileInputs.cache
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.csproj.CopyComplete
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.exe
 C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.pdb
+C:\Users\anton.petuhov\source\repos\ExiasE1Service\ExiasE1Service\obj\Debug\ExiasE1Service.csprojAssemblyReference.cache
